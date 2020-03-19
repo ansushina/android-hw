@@ -1,13 +1,15 @@
 package ru.sushina.test_1.app;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-import androidx.fragment.app.Fragment;
+import android.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +24,9 @@ public class ListFragment extends Fragment {
     int columnCount = 3;
     private ItemAdapter itemAdapter;
     private  ArrayList<Integer> numArray = new ArrayList<>();
+    private RecyclerView recView;
+    private Button button;
+    private int numCount = 100;
 
     @Override
     public void onAttach(Activity activity) {
@@ -38,18 +43,39 @@ public class ListFragment extends Fragment {
                              Bundle savedInstanceState) {
         Log.d(LOG_TAG, "Fragment1 onCreateView");
         View view = inflater.inflate(R.layout.list_fragment, null);
-        RecyclerView recView = view.findViewById(R.id.recyclerview);
-        recView.setLayoutManager(new GridLayoutManager(view.getContext(), columnCount));
-        itemAdapter = new ItemAdapter();
-        recView.setAdapter(itemAdapter);
 
-        for (int i = 0; i < 100; i++) {
+        int columnCount = 3;
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            columnCount = 4;
+        }
+
+        recView = view.findViewById(R.id.recyclerview);
+        recView.setLayoutManager(new GridLayoutManager(view.getContext(), columnCount));
+
+        numArray.clear();
+        for (int i = 0; i < numCount; i++) {
             numArray.add(i+1);
         }
+        itemAdapter = new ItemAdapter(getActivity());
+        recView.setAdapter(itemAdapter);
         itemAdapter.setItems(numArray);
+
+        button = view.findViewById(R.id.list_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numCount++;
+                numArray.add(numCount);
+                itemAdapter.setItems(numArray);
+            }
+        });
+
+
 
         return view;
     }
+
+
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
