@@ -5,14 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <fragment
-        android:id="@+id/fragment"
-        android:name="ru.sushina.test_1.app.ListFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+    tools:context=".MainActivity"
+    android:id="@+id/main_layout">
 
 
 </LinearLayout>
