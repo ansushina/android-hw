@@ -6,9 +6,6 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.util.Log;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,11 +21,5 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.add(R.id.main_layout, fragment);
             fragmentTransaction.commit();
         }
-    }
-
-
-
-    private String getLogTag() {
-        return getClass().getSimpleName() + " Lifecycle";
     }
 }
