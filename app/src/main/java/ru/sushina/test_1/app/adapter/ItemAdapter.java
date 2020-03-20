@@ -1,11 +1,9 @@
 package ru.sushina.test_1.app.adapter;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +38,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         public void bind(final Integer num) {
             tv.setText(String.valueOf(num));
             int textColor;
-            if (num%2 == 0) {
+            if (num % 2 == 0) {
                 textColor = Color.RED;
             } else {
                 textColor = Color.BLUE;
@@ -51,8 +49,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 public void onClick(View v) {
                     Log.d("tag", "in one item");
                     NumberFragment f = NumberFragment.newInstance(num);
-                    //f.setNumber(num);
-
                     FragmentTransaction transaction = ((Activity) mContext).getFragmentManager()
                             .beginTransaction();
                     transaction.replace(R.id.main_layout, f);
@@ -61,7 +57,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 }
             });
         }
-
     }
 
     public void onBindViewHolder(ItemViewHolder holder, int position) {
@@ -77,11 +72,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     public void setItems(ArrayList<Integer> nums) {
         numList = nums;
-        notifyDataSetChanged();
-    }
-
-    public void addItem(int num) {
-        numList.add(num);
         notifyDataSetChanged();
     }
 
