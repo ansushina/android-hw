@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -20,17 +22,40 @@ import ru.sushina.test_1.app.R;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
-    private List<Integer> numList = new ArrayList<>();
-    private View view;
-    Context mContext;
+    private List<Integer> numList;
+    private Context mContext;
 
-    public ItemAdapter(Context con) {
+    public ItemAdapter(@NonNull Context con) {
         mContext = con;
+    }
+
+    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+        holder.bind(numList.get(position));
+    }
+
+    public ItemAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        final View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item, parent, false);
+        return new ItemViewHolder(view);
+    }
+
+    public void setItems(@NonNull List<Integer> nums) {
+        numList = nums;
+        notifyDataSetChanged();
+    }
+
+    public void clearItems() {
+        numList.clear();
+        notifyDataSetChanged();
+    }
+
+    public int getItemCount() {
+        return numList.size();
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView tv;
-        public ItemViewHolder(View itemView) {
+        public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             tv = itemView.findViewById(R.id.itemTextView);
         }
@@ -47,9 +72,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             tv.setOnClickListener( new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("tag", "in one item");
-                    NumberFragment f = NumberFragment.newInstance(num);
-                    FragmentTransaction transaction = ((Activity) mContext).getFragmentManager()
+                    final NumberFragment f = NumberFragment.newInstance(num);
+                    final FragmentTransaction transaction = ((Activity) mContext).getFragmentManager()
                             .beginTransaction();
                     transaction.replace(R.id.main_layout, f);
                     transaction.addToBackStack(null);
@@ -57,30 +81,5 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 }
             });
         }
-    }
-
-    public void onBindViewHolder(ItemViewHolder holder, int position) {
-        holder.bind(numList.get(position));
-    }
-
-    public ItemAdapter.ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item, parent, false);
-
-        return new ItemViewHolder(view);
-    }
-
-    public void setItems(ArrayList<Integer> nums) {
-        numList = nums;
-        notifyDataSetChanged();
-    }
-
-    public void clearItems() {
-        numList.clear();
-        notifyDataSetChanged();
-    }
-
-    public int getItemCount() {
-        return numList.size();
     }
 }

@@ -8,10 +8,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import android.app.Fragment;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ru.sushina.test_1.app.adapter.ItemAdapter;
 
@@ -24,18 +28,18 @@ public class ListFragment extends Fragment {
     private final String key_data = "data_array";
 
     private ItemAdapter itemAdapter;
-    private ArrayList<Integer> numArray = new ArrayList<>();
+    private List<Integer> numArray = new ArrayList<>();
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.list_fragment, null);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.list_fragment, null);
 
         int columnCount = COLUMN_VERTICAL;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             columnCount = COLUMN_HORISONTAL;
         }
 
-        RecyclerView recView = view.findViewById(R.id.recyclerview);
+        final RecyclerView recView = view.findViewById(R.id.recyclerview);
         recView.setLayoutManager(new GridLayoutManager(view.getContext(), columnCount));
 
         if (savedInstanceState != null) {
@@ -53,7 +57,7 @@ public class ListFragment extends Fragment {
         itemAdapter.setItems(numArray);
 
 
-        Button button = view.findViewById(R.id.list_button);
+        final Button button = view.findViewById(R.id.list_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,8 +69,8 @@ public class ListFragment extends Fragment {
         return view;
     }
     @Override
-    public void onSaveInstanceState( Bundle state) {
+    public void onSaveInstanceState(@NonNull Bundle state) {
         super.onSaveInstanceState(state);
-        state.putIntegerArrayList(key_data, numArray);
+        state.putIntegerArrayList(key_data, new ArrayList<>(numArray));
     }
 }

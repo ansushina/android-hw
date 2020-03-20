@@ -11,13 +11,16 @@ import android.view.ViewGroup;
 import android.app.Fragment;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 public class NumberFragment extends Fragment {
     private static final String NUMBER_KEY = "number";
     public int number = 0;
 
     static public NumberFragment newInstance(int number) {
-        NumberFragment fragment = new NumberFragment();
-        Bundle bundle = new Bundle();
+        final NumberFragment fragment = new NumberFragment();
+        final Bundle bundle = new Bundle();
         bundle.putInt(NUMBER_KEY, number);
         fragment.setArguments(bundle);
 
@@ -25,11 +28,11 @@ public class NumberFragment extends Fragment {
     }
 
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.number_fragment, null) ;
-        TextView tView = view.findViewById(R.id.number_text);
-        Bundle arguments = getArguments();
+    public View onCreateView(@NonNull  LayoutInflater inflater,@Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.number_fragment, null) ;
+        final TextView tView = view.findViewById(R.id.number_text);
+        final Bundle arguments = getArguments();
         if (arguments != null) {
             number = arguments.getInt(NUMBER_KEY);
         }
