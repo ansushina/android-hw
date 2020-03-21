@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Fragment f = getFragmentManager().findFragmentById(R.layout.list_fragment);
         if (savedInstanceState == null) {
             final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             final ListFragment fragment = new ListFragment();
