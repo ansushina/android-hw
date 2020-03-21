@@ -2,6 +2,7 @@ package ru.sushina.test_1.app;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ public class ListFragment extends Fragment {
 
     private static final int COLUMN_VERTICAL = 3;
     private static final int COLUMN_HORISONTAL= 4;
-    private static final int NUMBERS_COUNT = 10;
+    private static final int NUMBERS_COUNT = 100;
 
     private final String key_data = "data_array";
 
@@ -46,7 +47,7 @@ public class ListFragment extends Fragment {
             numArray = savedInstanceState.getIntegerArrayList(key_data);
         }
 
-        if (savedInstanceState == null) {
+        if (numArray.size() == 0) {
             numArray.clear();
             for (int i = 0; i < NUMBERS_COUNT; i++) {
                 numArray.add(i+1);
