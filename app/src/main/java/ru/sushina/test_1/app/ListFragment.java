@@ -1,5 +1,6 @@
 package ru.sushina.test_1.app;
 
+import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +21,7 @@ import java.util.List;
 
 import ru.sushina.test_1.app.adapter.ItemAdapter;
 
-public class ListFragment extends Fragment {
+public class ListFragment extends Fragment  implements ItemAdapter.OnClickNumberListener {
 
     private static final int COLUMN_VERTICAL = 3;
     private static final int COLUMN_HORISONTAL= 4;
@@ -53,7 +54,7 @@ public class ListFragment extends Fragment {
                 numArray.add(i+1);
             }
         }
-        itemAdapter = new ItemAdapter(getActivity());
+        itemAdapter = new ItemAdapter(this);
         recView.setAdapter(itemAdapter);
         itemAdapter.setItems(numArray);
 
@@ -73,5 +74,14 @@ public class ListFragment extends Fragment {
     public void onSaveInstanceState(@NonNull Bundle state) {
         super.onSaveInstanceState(state);
         state.putIntegerArrayList(key_data, new ArrayList<>(numArray));
+    }
+
+    public void onClickNumber(int number) {
+        final NumberFragment f = NumberFragment.newInstance(number);
+        final FragmentTransaction transaction = (getActivity()).getFragmentManager()
+                .beginTransaction();
+        transaction.replace(R.id.main_layout, f);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

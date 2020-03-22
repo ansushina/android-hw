@@ -31,12 +31,12 @@ public class NumberFragment extends Fragment {
     public View onCreateView(@NonNull  LayoutInflater inflater,@Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.number_fragment, null) ;
-        final TextView tView = view.findViewById(R.id.number_text);
+        final TextView textView = view.findViewById(R.id.number_text);
         final Bundle arguments = getArguments();
         if (arguments != null) {
             number = arguments.getInt(NUMBER_KEY);
         }
-        tView.setText(String.valueOf(number));
+        textView.setText(String.valueOf(number));
 
         int textColor;
         if (number%2 == 0) {
@@ -44,7 +44,7 @@ public class NumberFragment extends Fragment {
         } else {
             textColor = Color.BLUE;
         }
-        tView.setTextColor(textColor);
+        textView.setTextColor(textColor);
 
         return view;
     }

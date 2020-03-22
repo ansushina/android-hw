@@ -23,10 +23,10 @@ import ru.sushina.test_1.app.R;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
     private List<Integer> numList;
-    private Context mContext;
+    private final OnClickNumberListener mListener;
 
-    public ItemAdapter(@NonNull Context con) {
-        mContext = con;
+    public ItemAdapter(@NonNull OnClickNumberListener listener) {
+        mListener = listener;
     }
 
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
@@ -53,25 +53,30 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         return numList.size();
     }
 
+    public interface OnClickNumberListener {
+        void onClickNumber(int number);
+    }
+
     class ItemViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv;
+        private TextView textView;
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv = itemView.findViewById(R.id.itemTextView);
+            textView = itemView.findViewById(R.id.itemTextView);
         }
 
         public void bind(final Integer num) {
-            tv.setText(String.valueOf(num));
+            textView.setText(String.valueOf(num));
             int textColor;
             if (num % 2 == 0) {
                 textColor = Color.RED;
             } else {
                 textColor = Color.BLUE;
             }
-            tv.setTextColor(textColor);
-            tv.setOnClickListener( new View.OnClickListener() {
+            textView.setTextColor(textColor);
+           /* textView.setOnClickListener( new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     final NumberFragment f = NumberFragment.newInstance(num);
                     final FragmentTransaction transaction = ((Activity) mContext).getFragmentManager()
                             .beginTransaction();
@@ -79,7 +84,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                     transaction.addToBackStack(null);
                     transaction.commit();
                 }
-            });
+            });*/
+           textView.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   mListener.onClickNumber(num);
+               }
+           });
         }
     }
 }
