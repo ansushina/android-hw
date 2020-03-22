@@ -73,24 +73,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 textColor = Color.BLUE;
             }
             textView.setTextColor(textColor);
-           /* textView.setOnClickListener( new View.OnClickListener() {
+            textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    final NumberFragment f = NumberFragment.newInstance(num);
-                    final FragmentTransaction transaction = ((Activity) mContext).getFragmentManager()
-                            .beginTransaction();
-                    transaction.replace(R.id.main_layout, f);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
+                    mListener.onClickNumber(num);
                 }
-            });*/
-           textView.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   mListener.onClickNumber(num);
-               }
-           });
+            });
         }
     }
 }
