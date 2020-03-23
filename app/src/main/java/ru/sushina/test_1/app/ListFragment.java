@@ -21,7 +21,7 @@ import java.util.List;
 
 import ru.sushina.test_1.app.adapter.ItemAdapter;
 
-public class ListFragment extends Fragment  implements ItemAdapter.OnClickNumberListener {
+public class ListFragment extends Fragment  implements OnNumberClickListener {
 
     private static final int COLUMN_VERTICAL = 3;
     private static final int COLUMN_HORISONTAL= 4;

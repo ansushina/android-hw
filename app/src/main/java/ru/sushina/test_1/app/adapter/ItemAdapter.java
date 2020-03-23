@@ -1,31 +1,25 @@
 package ru.sushina.test_1.app.adapter;
 
-import android.app.Activity;
-import android.app.FragmentTransaction;
-import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import ru.sushina.test_1.app.NumberFragment;
+import ru.sushina.test_1.app.OnNumberClickListener;
 import ru.sushina.test_1.app.R;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
     private List<Integer> numList;
-    private final OnClickNumberListener mListener;
+    private final OnNumberClickListener mListener;
 
-    public ItemAdapter(@NonNull OnClickNumberListener listener) {
+    public ItemAdapter(@NonNull OnNumberClickListener listener) {
         mListener = listener;
     }
 
@@ -51,10 +45,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     public int getItemCount() {
         return numList.size();
-    }
-
-    public interface OnClickNumberListener {
-        void onClickNumber(int number);
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
