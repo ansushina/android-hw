@@ -17,10 +17,10 @@ import ru.sushina.test_1.app.R;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
     private List<Integer> numList;
-    private final OnNumberClickListener mListener;
+    private final OnNumberClickListener listener;
 
-    public ItemAdapter(@NonNull OnNumberClickListener listener) {
-        mListener = listener;
+    public ItemAdapter(@NonNull OnNumberClickListener onClickListener) {
+        listener = onClickListener;
     }
 
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
@@ -66,7 +66,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onClickNumber(num);
+                    listener.onClickNumber(num);
                 }
             });
         }

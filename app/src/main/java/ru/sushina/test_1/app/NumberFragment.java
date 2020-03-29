@@ -39,7 +39,7 @@ public class NumberFragment extends Fragment {
         textView.setText(String.valueOf(number));
 
         int textColor;
-        if (number%2 == 0) {
+        if (number % 2 == 0) {
             textColor = Color.RED;
         } else {
             textColor = Color.BLUE;
